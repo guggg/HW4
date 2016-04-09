@@ -31,11 +31,27 @@ if (!require('Rfacebook')){
     ## 
     ##     getGroup
 
+``` r
+token<-"CAACEdEose0cBAOW9QjjEMGHGp54JEGytGz9tPRltLiHRGJsHae0dSEHxlVmogqJ4hd8EoUQvB3yvDWFDpnHX8dfA2AIgelMfXQ7jZCrQbeaTEIWfjZCWoVZCzZB3cqrq8HFwr73qD1eaiNZAZCmFq0iZCi6kWFHn6Dh8gPFkRLMqvLhl17CuvbpixEO6k0ZBr1FcXq9L9pmFvL3JeX1ZCIBg8"
+
+FBData=GET(
+
+paste0(
+ "https://graph.facebook.com/v2.5/llchu?fields=posts.limit(10)%7Blikes%2Ccomments%2Cmessage%7D&access_token=CAACEdEose0cBAPZBON6vvVgStfZA2c0kEXMFu0V4YygJdxAdIHDPHM2JZBZAcZBz472chZB2wlOHdwVynbSkBeBpVLCMaeP1TqRuNiZBEdeQ8ywu1V8aN8ZA57P8vmYByGvfLPxG4dhJkaX8WQhXS3yLk8uditasXrBsCZCou0ofxb0jeKMMdZCoIHjAdHdtwwUVidhe3sMQWQJPazZC5mKsJyn",
+
+token))
+
+names(FBData)
+```
+
+    ##  [1] "url"         "status_code" "headers"     "all_headers" "cookies"    
+    ##  [6] "content"     "date"        "times"       "request"     "handle"
+
 讀取朱立倫粉絲團資料
 --------------------
 
 ``` r
-token<-'CAACEdEose0cBAKgLDL114Dpe1oUfhZCUF3Cy0K8s1ZAndZBlKaYSZC6fouqkfODu6QSfmRcJ6ZCaspuZCDIaaqarGOLtohyfwQRXZB7h6182TlSLzAq2ZBjTFrR37jpALaIRZBDX2rV40oU0HnLvngZAsIJdryReOztcV12P3aML3Wcd8gui7hEhFnUWwiwsYIQof6nBQEPILrdlunrSxufPVW'
+token<-'CAACEdEose0cBAPZBON6vvVgStfZA2c0kEXMFu0V4YygJdxAdIHDPHM2JZBZAcZBz472chZB2wlOHdwVynbSkBeBpVLCMaeP1TqRuNiZBEdeQ8ywu1V8aN8ZA57P8vmYByGvfLPxG4dhJkaX8WQhXS3yLk8uditasXrBsCZCou0ofxb0jeKMMdZCoIHjAdHdtwwUVidhe3sMQWQJPazZC5mKsJyn'
 totalPage<-NULL
 lastDate<-Sys.Date()
 DateVectorStr<-as.character(seq(as.Date("2016-01-01"),lastDate,by="5 days"))
@@ -92,19 +108,19 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-LikeCount<-aggregate(likes_count~dateTPE,totalPage,sum)
+LikeCount<-aggregate(likes_count~dateTPE,totalPage,mean)
 library(knitr)
 kable(head(LikeCount[order(LikeCount$likes_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  likes\_count|
 |-----|:-----------|-------------:|
-| 15  | 2016-01-15 |        247024|
-| 12  | 2016-01-12 |        198144|
-| 16  | 2016-01-16 |        166772|
-| 14  | 2016-01-14 |        113835|
-| 13  | 2016-01-13 |        113799|
-| 9   | 2016-01-09 |        105459|
+| 16  | 2016-01-16 |       83386.0|
+| 34  | 2016-02-06 |       57639.0|
+| 9   | 2016-01-09 |       52729.5|
+| 15  | 2016-01-15 |       49404.8|
+| 17  | 2016-01-18 |       46132.0|
+| 36  | 2016-02-08 |       41877.0|
 
 在2016/01/16 獲得讚數最多，達24萬人次，因為是選舉日當天，所以大家都很關注總統候選人的各個消息。
 
@@ -118,19 +134,19 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-CommentsCount<-aggregate(comments_count~dateTPE,totalPage,sum)
+CommentsCount<-aggregate(comments_count~dateTPE,totalPage,mean)
 library(knitr)
 kable(head(CommentsCount[order(CommentsCount$comments_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  comments\_count|
 |-----|:-----------|----------------:|
-| 15  | 2016-01-15 |            39219|
-| 16  | 2016-01-16 |            21211|
-| 12  | 2016-01-12 |             7210|
-| 14  | 2016-01-14 |             4248|
-| 13  | 2016-01-13 |             4015|
-| 1   | 2016-01-01 |             3865|
+| 16  | 2016-01-16 |          10605.5|
+| 15  | 2016-01-15 |           7843.8|
+| 17  | 2016-01-18 |           3629.0|
+| 9   | 2016-01-09 |           1883.0|
+| 18  | 2016-01-19 |           1649.0|
+| 34  | 2016-02-06 |           1377.0|
 
 在2016/01/16獲得評論數最多，高達3萬九千多人次，因為當天為選舉日，所以大家意見都很多。
 
@@ -144,18 +160,18 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-SharesCount<-aggregate(shares_count~dateTPE,totalPage,sum)
+SharesCount<-aggregate(shares_count~dateTPE,totalPage,mean)
 library(knitr)
 kable(head(SharesCount[order(SharesCount$shares_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  shares\_count|
 |-----|:-----------|--------------:|
-| 15  | 2016-01-15 |          11713|
-| 12  | 2016-01-12 |           7004|
-| 1   | 2016-01-01 |           4563|
-| 13  | 2016-01-13 |           2780|
-| 6   | 2016-01-06 |           2746|
-| 16  | 2016-01-16 |           2727|
+| 15  | 2016-01-15 |       2342.600|
+| 1   | 2016-01-01 |       1521.000|
+| 16  | 2016-01-16 |       1363.500|
+| 34  | 2016-02-06 |       1265.000|
+| 12  | 2016-01-12 |       1000.571|
+| 9   | 2016-01-09 |        937.000|
 
-在2016/01/15文章分享數最多，高達1萬1千多人次，因為大選前一天，PO文皆屬於積極、正面、時事種類，可能獲得較多支持者認同並分享。
+在2016/01/15文章分享數最多，高達1萬1千多人次，因為大選前一天，PO文皆屬於積極、正面、時事種類，可能獲得較多支持者認同並已分享。
