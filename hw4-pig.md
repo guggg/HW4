@@ -35,7 +35,7 @@ if (!require('Rfacebook')){
 --------------------
 
 ``` r
-token<-'CAAM3edvfcmsBAFzPEyeq2CDqORpnJy956QHJgxv7f4clehxnyIhV42Ie0oTmOo6KiEclYWfys3d1Dmf34jCTjDdAThFaBlwmZB2ek2XH8PTr0tB1v1DPZB3kIqbmWTxJZAsKbPDg99L5SJsB7c6ZBiYW7sJQKvSbsVfJNe0eH8WvAfZBTK9GHJAOCwsr8AkhJ9XJDNyAmn1f7dkzp6z9P'
+token<-'CAACEdEose0cBAKgLDL114Dpe1oUfhZCUF3Cy0K8s1ZAndZBlKaYSZC6fouqkfODu6QSfmRcJ6ZCaspuZCDIaaqarGOLtohyfwQRXZB7h6182TlSLzAq2ZBjTFrR37jpALaIRZBDX2rV40oU0HnLvngZAsIJdryReOztcV12P3aML3Wcd8gui7hEhFnUWwiwsYIQof6nBQEPILrdlunrSxufPVW'
 totalPage<-NULL
 lastDate<-Sys.Date()
 DateVectorStr<-as.character(seq(as.Date("2016-01-01"),lastDate,by="5 days"))
@@ -80,7 +80,7 @@ kable(head(PostCount[order(PostCount$id,decreasing = T),]))
 | 65  | 2016-03-20 |    4|
 | 1   | 2016-01-01 |    3|
 
-在2016/01/12發文數最多，因時間近選舉日，都是呼籲民眾出來投票或是說台灣人真的很棒之類的。
+在2016/01/12發文數最多，共有7篇，因時間近選舉日，都是呼籲民眾出來投票或是說台灣人真的很棒之類的。
 
 每日獲得讚數分析:
 -----------------
