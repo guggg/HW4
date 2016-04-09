@@ -80,7 +80,7 @@ kable(head(PostCount[order(PostCount$id,decreasing = T),]))
 | 65  | 2016-03-20 |    4|
 | 1   | 2016-01-01 |    3|
 
-在2016/01/12發文數最多，共有7篇，因時間近選舉日，都是呼籲民眾出來投票或是說台灣人真的很棒之類的。
+在2016/01/12發文數最多，共有7篇，因時間近選舉日，都是呼籲民眾出來投票或是說台灣人真的很棒或是拜票文。
 
 每日獲得讚數分析:
 -----------------
@@ -92,21 +92,21 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-LikeCount<-aggregate(likes_count~dateTPE,totalPage,mean)
+LikeCount<-aggregate(likes_count~dateTPE,totalPage,sum)
 library(knitr)
 kable(head(LikeCount[order(LikeCount$likes_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  likes\_count|
 |-----|:-----------|-------------:|
-| 16  | 2016-01-16 |       83386.0|
-| 34  | 2016-02-06 |       57639.0|
-| 9   | 2016-01-09 |       52729.5|
-| 15  | 2016-01-15 |       49404.8|
-| 17  | 2016-01-18 |       46132.0|
-| 36  | 2016-02-08 |       41877.0|
+| 15  | 2016-01-15 |        247024|
+| 12  | 2016-01-12 |        198144|
+| 16  | 2016-01-16 |        166772|
+| 14  | 2016-01-14 |        113835|
+| 13  | 2016-01-13 |        113799|
+| 9   | 2016-01-09 |        105459|
 
-在2016/01/16 獲得讚數最，因為是選舉日當天，所以大家都很關注總統候選人的各個消息。
+在2016/01/16 獲得讚數最多，達24萬人次，因為是選舉日當天，所以大家都很關注總統候選人的各個消息。
 
 每日評論數分析
 --------------
@@ -118,21 +118,21 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-CommentsCount<-aggregate(comments_count~dateTPE,totalPage,mean)
+CommentsCount<-aggregate(comments_count~dateTPE,totalPage,sum)
 library(knitr)
 kable(head(CommentsCount[order(CommentsCount$comments_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  comments\_count|
 |-----|:-----------|----------------:|
-| 16  | 2016-01-16 |          10605.5|
-| 15  | 2016-01-15 |           7843.8|
-| 17  | 2016-01-18 |           3629.0|
-| 9   | 2016-01-09 |           1883.0|
-| 18  | 2016-01-19 |           1649.0|
-| 34  | 2016-02-06 |           1377.0|
+| 15  | 2016-01-15 |            39219|
+| 16  | 2016-01-16 |            21211|
+| 12  | 2016-01-12 |             7210|
+| 14  | 2016-01-14 |             4248|
+| 13  | 2016-01-13 |             4015|
+| 1   | 2016-01-01 |             3865|
 
-在2016/01/16獲得評論數最多，因為當天為選舉日，所以大家意見都很多。
+在2016/01/16獲得評論數最多，高達3萬九千多人次，因為當天為選舉日，所以大家意見都很多。
 
 每日分享數分析
 --------------
@@ -144,18 +144,18 @@ totalPage$datetime <- as.POSIXct(totalPage$created_time,
 totalPage$dateTPE <- format(totalPage$datetime, "%Y-%m-%d", 
                             tz = "Asia/Taipei") #2016-01-16
 totalPage$weekdays <-weekdays(as.Date(totalPage$dateTPE))
-SharesCount<-aggregate(shares_count~dateTPE,totalPage,mean)
+SharesCount<-aggregate(shares_count~dateTPE,totalPage,sum)
 library(knitr)
 kable(head(SharesCount[order(SharesCount$shares_count,decreasing = T),]))
 ```
 
 |     | dateTPE    |  shares\_count|
 |-----|:-----------|--------------:|
-| 15  | 2016-01-15 |       2342.600|
-| 1   | 2016-01-01 |       1521.000|
-| 16  | 2016-01-16 |       1363.500|
-| 34  | 2016-02-06 |       1265.000|
-| 12  | 2016-01-12 |       1000.571|
-| 9   | 2016-01-09 |        937.000|
+| 15  | 2016-01-15 |          11713|
+| 12  | 2016-01-12 |           7004|
+| 1   | 2016-01-01 |           4563|
+| 13  | 2016-01-13 |           2780|
+| 6   | 2016-01-06 |           2746|
+| 16  | 2016-01-16 |           2727|
 
-在2016/01/15文章分享數最多，因為大選前一天，PO文皆屬於積極、正面、時事種類，可能獲得較多支持者認同並分享。
+在2016/01/15文章分享數最多，高達1萬1千多人次，因為大選前一天，PO文皆屬於積極、正面、時事種類，可能獲得較多支持者認同並分享。
